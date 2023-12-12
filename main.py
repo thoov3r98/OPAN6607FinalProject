@@ -5,10 +5,14 @@ from sklearn.linear_model import LogisticRegression
 from sklearn.model_selection import train_test_split
 import streamlit as st
 
-st.markdown("# Thomas Hoover's OPAN6607 Final Project")
+
+st.markdown("<h1 style='text-align: center;'>Thomas Hoover's OPAN6607 Final Project</h1>", unsafe_allow_html=True)
 
 st.markdown(
-    "### This app will provide a probability of how likely a person is to use linked in based on the given inputs")
+    "<h3 style='text-align: center;'>This app will provide a probability of how likely a person is to use LinkedIn based on the given inputs</h3>",
+    unsafe_allow_html=True
+)
+
 
 # Sidebar header
 st.sidebar.header("User Inputs")
