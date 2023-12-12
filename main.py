@@ -15,10 +15,23 @@ st.markdown(
 
 
 # Sidebar header
-st.sidebar.header("## User Inputs")
+st.sidebar.header("User Inputs")
 
 # User input fields
-income = st.sidebar.text_input("Enter your income:", value="Enter a number here")
+income_mapping = {
+    '1': 'Less than $10,000',
+    '2': '10 to under $20,000',
+    '3': '20 to under $30,000',
+    '4': '30 to under $40,000',
+    '5': '40 to under $50,000',
+    '6': '50 to under $75,000',
+    '7': '75 to under $100,000',
+    '8': '100 to under $150,000',
+    '9': '$150,000 or more'
+}
+
+income_input = st.sidebar.selectbox("Select your income range:", list(income_mapping.keys()))
+income = income_mapping[income_input]
 educ2 = st.sidebar.text_input("Enter your education level:", value="Enter a number here")
 par = st.sidebar.selectbox("Are you a parent?", ('Yes', 'No'))
 marital = st.sidebar.selectbox("Are you married?", ('Yes', 'No'))
