@@ -7,29 +7,28 @@ import streamlit as st
 
 st.markdown("# Thomas Hoover's OPAN6607 Final Project")
 
-st.markdown("### This app will provide a probability of how likely a person is to use linked in based on the given inputs")
+st.markdown(
+    "### This app will provide a probability of how likely a person is to use linked in based on the given inputs")
 
 income = st.text_input("Enter an income:", value="Enter a number here")
 educ2 = st.text_input("Enter an education level:", value="Enter a number here")
 par = st.selectbox("Are you a Parent?", ('Yes', 'No'))
 marital = st.selectbox("Are you Maried?", ('Yes', 'No'))
-gender = st.selectbox("What is your Gender", ('Yes', 'No', 'Other'))
+gender = st.selectbox("What is your Gender", ('Male', 'Female', 'Other'))
 age = st.text_input("How old are you?", value="Enter a number here")
 
 
-
-def pred_from_new_data(income, educ2, par, marital, gender, age):
-    # 1: Read the data
+def train_model():
     s = pd.read_csv("social_media_usage.csv")
 
     ss = s[['income', 'educ2', 'par', 'marital', 'gender', 'age']]
-    ss.loc[:,'sm_li'] = s['web1h'].apply(clean_sm)
-    ss.loc[:,'income'] = np.where(s['income'] > 9, np.nan, ss['income'])
-    ss.loc[:,'educ2'] = np.where(s['educ2'] > 8, np.nan, ss['educ2'])
-    ss.loc[:,'par'] = s['par'].apply(clean_sm)
-    ss.loc[:,'marital'] = s['marital'].apply(clean_sm)
-    ss.loc[:,'gender'] = np.where(s['gender'] == 2, 1, 0)
-    ss.loc[:,'age'] = np.where(s['age'] > 98, np.nan, ss['age'])
+    ss.loc[:, 'sm_li'] = s['web1h'].apply(clean_sm)
+    ss.loc[:, 'income'] = np.where(s['income'] > 9, np.nan, ss['income'])
+    ss.loc[:, 'educ2'] = np.where(s['educ2'] > 8, np.nan, ss['educ2'])
+    ss.loc[:, 'par'] = s['par'].apply(clean_sm)
+    ss.loc[:, 'marital'] = s['marital'].apply(clean_sm)
+    ss.loc[:, 'gender'] = np.where(s['gender'] == 2, 1, 0)
+    ss.loc[:, 'age'] = np.where(s['age'] > 98, np.nan, ss['age'])
 
     ss = ss.dropna()
 
@@ -44,7 +43,11 @@ def pred_from_new_data(income, educ2, par, marital, gender, age):
 
     lr = LogisticRegression(class_weight='balanced')
     lr.fit(X_train, y_train)
+    return lr
 
+
+def pred_from_new_data(income, educ2, par, marital, gender, age):
+    lr = train_model()
 
     newdata = pd.DataFrame({
         "income": [income],
@@ -82,9 +85,14 @@ def pred_from_new_data(income, educ2, par, marital, gender, age):
     else:
         sm_pred2 = "Not a Linkedin User"
 
-    print(f"Predicted class (82 year old): %s" % sm_pred2)
-    print(f"Probability that this person is a linked in user (82 year old): {probs2[0][1]}")
+    st.write(f"Predicted class (82 year old): %s" % sm_pred2)
+    st.write("Probability that this person is a linked in user (82 year old): {probs2[0][1]}")
+
 
 def clean_sm(x):
-    x = np.where(x==1,1,0)
+    x = np.where(x == 1, 1, 0)
     return x
+
+
+if st.button("Generate Prediction"):
+    pred_from_new_data(income, educ2, par, marital, gender, age)
