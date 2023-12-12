@@ -15,7 +15,7 @@ st.markdown(
 
 
 # Sidebar header
-st.sidebar.header("User Inputs")
+st.sidebar.header("## User Inputs")
 
 # User input fields
 income = st.sidebar.text_input("Enter your income:", value="Enter a number here")
