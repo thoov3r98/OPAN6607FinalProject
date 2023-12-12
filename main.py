@@ -9,12 +9,12 @@ st.markdown("# Thomas Hoover's OPAN6607 Final Project")
 
 st.markdown("### This app will provide a probability of how likely a person is to use linked in based on the given inputs")
 
-income = st.text_input("Enter an income:", value = "Enter a number here")
-educ2 = st.text_input("Enter an education level:", value = "Enter a number here")
-par = st.text_input("Are you a parent?", value = "Enter a number here")
-marital = st.text_input("Are you maried?", value = "Enter a number here")
-gender = st.text_input("Whats your gender?", value = "Enter a number here")
-age = st.text_input("How old are you?", value = "Enter a number here")
+income = st.text_input("Enter an income:", value="Enter a number here")
+educ2 = st.text_input("Enter an education level:", value="Enter a number here")
+par = st.selectbox("Are you a Parent?", ('Yes', 'No'))
+marital = st.selectbox("Are you Maried?", ('Yes', 'No'))
+gender = st.selectbox("What is your Gender", ('Yes', 'No', 'Other'))
+age = st.text_input("How old are you?", value="Enter a number here")
 
 
 
