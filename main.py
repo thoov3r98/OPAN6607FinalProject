@@ -9,7 +9,16 @@ st.markdown("# Thomas Hoover's OPAN6607 Final Project")
 
 st.markdown("### This app will provide a probability of how likely a person is to use linked in based on the given inputs")
 
-def log_app():
+income = st.text_input("Enter an income:", value = "Enter a number here")
+educ2 = st.text_input("Enter an education level:", value = "Enter a number here")
+par = st.text_input("Are you a parent?", value = "Enter a number here")
+marital = st.text_input("Are you maried?", value = "Enter a number here")
+gender = st.text_input("Whats your gender?", value = "Enter a number here")
+age = st.text_input("How old are you?", value = "Enter a number here")
+
+
+
+def pred_from_new_data(income, educ2, par, marital, gender, age):
     # 1: Read the data
     s = pd.read_csv("social_media_usage.csv")
 
@@ -37,14 +46,13 @@ def log_app():
     lr.fit(X_train, y_train)
 
 
-def pred_from_new_data():
     newdata = pd.DataFrame({
-        "income": [8],
-        "educ2": [7],
-        "par": [0],
-        "marital": [1],
-        "gender": [1],
-        "age": [42]
+        "income": [income],
+        "educ2": [educ2],
+        "par": [par],
+        "marital": [marital],
+        "gender": [gender],
+        "age": [age]
     })
 
     prediction = lr.predict(newdata)
