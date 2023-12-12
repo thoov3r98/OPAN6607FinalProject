@@ -18,7 +18,7 @@ st.markdown(
 st.sidebar.header("User Inputs")
 
 # User input fields
-income_slider = st.sidebar.slider("Select your income:", min_value=0, max_value=151000, value=50000, step=100)
+income_slider = st.sidebar.slider("Select your income:", min_value=0, max_value=151000, value=50000, step=1000)
 
 # Map income to the specified ranges
 income_mapping = {
@@ -30,7 +30,7 @@ income_mapping = {
     (50000, 75000): 6,
     (75000, 100000): 7,
     (100000, 150000): 8,
-    (150000, 151000): 9,
+    (150000, float('inf')): 9,
 }
 
 # Determine the income range based on the slider value
@@ -38,11 +38,37 @@ for income_range, mapped_value in income_mapping.items():
     if income_slider >= income_range[0] and income_slider < income_range[1]:
         income = mapped_value
         break
-educ2 = st.sidebar.text_input("Enter your education level:", value="Enter a number here")
+
+education_levels = {
+    1: "Less than high school (Grades 1-8 or no formal schooling)",
+    2: "High school incomplete (Grades 9-11 or Grade 12 with NO diploma)",
+    3: "High school graduate (Grade 12 with diploma or GED certificate)",
+    4: "Some college, no degree (includes some community college)",
+    5: "Two-year associate degree from a college or university",
+    6: "Four-year college or university degree/Bachelor’s degree (e.g., BS, BA, AB)",
+    7: "Some postgraduate or professional schooling, no postgraduate degree (e.g. some graduate school)",
+    8: "Postgraduate or professional degree, including master’s, doctorate, medical or law degree (e.g., MA, MS, PhD, MD, JD)",
+    98: "Don’t know",
+    99: "Refused",
+}
+educ2 = st.sidebar.selectbox("Select your education level:", list(education_levels.values()))
+
 par = st.sidebar.selectbox("Are you a parent?", ('Yes', 'No'))
 marital = st.sidebar.selectbox("Are you married?", ('Yes', 'No'))
 gender = st.sidebar.selectbox("Select your gender", ('Male', 'Female', 'Other'))
 age = st.sidebar.slider("How old are you?", min_value=18, max_value=100, value=25)
+
+# Map income to the specified ranges
+age_mapping = {
+    (0, 97): 1,
+    (98, float('inf')): 1,
+}
+
+# Determine the income range based on the slider value
+for income_range, mapped_value in income_mapping.items():
+    if income_slider >= income_range[0] and income_slider < income_range[1]:
+        income = mapped_value
+        break
 
 # Display user inputs
 st.subheader("User Inputs:")
@@ -64,7 +90,7 @@ def train_model():
     ss.loc[:, 'par'] = s['par'].apply(clean_sm)
     ss.loc[:, 'marital'] = s['marital'].apply(clean_sm)
     ss.loc[:, 'gender'] = np.where(s['gender'] == 2, 1, 0)
-    ss.loc[:, 'age'] = np.where(s['age'] > 98, np.nan, ss['age'])
+    ss.loc[:, 'age'] = np.where(s['age'] >= 98, np.nan, ss['age'])
 
     ss = ss.dropna()
 
