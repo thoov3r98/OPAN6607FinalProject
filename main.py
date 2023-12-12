@@ -10,12 +10,25 @@ st.markdown("# Thomas Hoover's OPAN6607 Final Project")
 st.markdown(
     "### This app will provide a probability of how likely a person is to use linked in based on the given inputs")
 
-income = st.text_input("Enter an income:", value="Enter a number here")
-educ2 = st.text_input("Enter an education level:", value="Enter a number here")
-par = st.selectbox("Are you a Parent?", ('Yes', 'No'))
-marital = st.selectbox("Are you Maried?", ('Yes', 'No'))
-gender = st.selectbox("What is your Gender", ('Male', 'Female', 'Other'))
-age = st.text_input("How old are you?", value="Enter a number here")
+# Sidebar header
+st.sidebar.header("User Inputs")
+
+# User input fields
+income = st.sidebar.text_input("Enter your income:", value="Enter a number here")
+educ2 = st.sidebar.text_input("Enter your education level:", value="Enter a number here")
+par = st.sidebar.selectbox("Are you a parent?", ('Yes', 'No'))
+marital = st.sidebar.selectbox("Are you married?", ('Yes', 'No'))
+gender = st.sidebar.selectbox("Select your gender", ('Male', 'Female', 'Other'))
+age = st.sidebar.slider("How old are you?", min_value=18, max_value=100, value=25)
+
+# Display user inputs
+st.subheader("User Inputs:")
+st.write(f"**Income:** {income}")
+st.write(f"**Education Level:** {educ2}")
+st.write(f"**Parent:** {par}")
+st.write(f"**Marital Status:** {marital}")
+st.write(f"**Gender:** {gender}")
+st.write(f"**Age:** {age}")
 
 
 def train_model():
