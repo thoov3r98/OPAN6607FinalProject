@@ -18,20 +18,26 @@ st.markdown(
 st.sidebar.header("User Inputs")
 
 # User input fields
+income_slider = st.sidebar.slider("Select your income:", min_value=0, max_value=151000, value=50000, step=100)
+
+# Map income to the specified ranges
 income_mapping = {
-    '1': 'Less than $10,000',
-    '2': '10 to under $20,000',
-    '3': '20 to under $30,000',
-    '4': '30 to under $40,000',
-    '5': '40 to under $50,000',
-    '6': '50 to under $75,000',
-    '7': '75 to under $100,000',
-    '8': '100 to under $150,000',
-    '9': '$150,000 or more'
+    (0, 10000): 1,
+    (10000, 20000): 2,
+    (20000, 30000): 3,
+    (30000, 40000): 4,
+    (40000, 50000): 5,
+    (50000, 75000): 6,
+    (75000, 100000): 7,
+    (100000, 150000): 8,
+    (150000, 151000): 9,
 }
 
-income_input = st.sidebar.selectbox("Select your income range:", list(income_mapping.keys()))
-income = income_mapping[income_input]
+# Determine the income range based on the slider value
+for income_range, mapped_value in income_mapping.items():
+    if income_slider >= income_range[0] and income_slider < income_range[1]:
+        income = mapped_value
+        break
 educ2 = st.sidebar.text_input("Enter your education level:", value="Enter a number here")
 par = st.sidebar.selectbox("Are you a parent?", ('Yes', 'No'))
 marital = st.sidebar.selectbox("Are you married?", ('Yes', 'No'))
