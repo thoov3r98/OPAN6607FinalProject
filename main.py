@@ -51,8 +51,30 @@ education_levels = {
     98: "Don’t know",
     99: "Refused",
 }
-educ2 = st.sidebar.selectbox("Select your education level:", list(education_levels.values()))
 
+# Parent mapping
+parent_mapping = {
+    1: "Yes",
+    2: "No",
+    8: "(VOL.) Don't know",
+}
+
+marital_mapping = {
+    1: "Married",
+    2: "Living with a partner",
+    2: "Divorced",
+    2: "Separated",
+    2: "Widowed",
+    2: "Never been married",
+}
+
+gender_mapping = {
+    1: "Male",
+    2: "Female",
+    3: "Other",
+}
+
+educ2 = st.sidebar.selectbox("Select your education level:", list(education_levels.values()))
 par = st.sidebar.selectbox("Are you a parent?", ('Yes', 'No'))
 marital = st.sidebar.selectbox("Are you married?", ('Yes', 'No'))
 gender = st.sidebar.selectbox("Select your gender", ('Male', 'Female', 'Other'))
