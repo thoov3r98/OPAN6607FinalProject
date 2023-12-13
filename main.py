@@ -75,9 +75,9 @@ gender_mapping = {
 }
 
 educ2 = st.sidebar.selectbox("Select your education level:", list(education_levels.values()))
-par = st.sidebar.selectbox("Are you a parent?", ('Yes', 'No'))
-marital = st.sidebar.selectbox("Are you married?", ('Yes', 'No'))
-gender = st.sidebar.selectbox("Select your gender", ('Male', 'Female', 'Other'))
+par = st.sidebar.selectbox("Are you a parent?", list(parent_mapping.values()))
+marital = st.sidebar.selectbox("Are you married?", list(marital_mapping.values()))
+gender = st.sidebar.selectbox("Select your gender", list(gender_mapping.values()))
 age = st.sidebar.slider("How old are you?", min_value=18, max_value=100, value=25)
 
 # Map income to the specified ranges
