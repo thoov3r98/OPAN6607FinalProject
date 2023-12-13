@@ -162,5 +162,4 @@ def clean_sm(x):
 
 
 if st.button("Generate Prediction"):
-    st.write(income, educ2, par, marital, gender, age)
     pred_from_new_data(income, educ2, par, marital, gender, age)
