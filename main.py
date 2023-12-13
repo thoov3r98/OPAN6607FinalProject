@@ -62,10 +62,10 @@ parent_mapping = {
 marital_mapping = {
     1: "Married",
     2: "Living with a partner",
-    2: "Divorced",
-    2: "Separated",
-    2: "Widowed",
-    2: "Never been married",
+    3: "Divorced",
+    4: "Separated",
+    5: "Widowed",
+    6: "Never been married",
 }
 
 gender_mapping = {
