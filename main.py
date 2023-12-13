@@ -40,16 +40,16 @@ for income_range, mapped_value in income_mapping.items():
         break
 
 education_levels = {
-    1: "Less than high school (Grades 1-8 or no formal schooling)",
-    2: "High school incomplete (Grades 9-11 or Grade 12 with NO diploma)",
-    3: "High school graduate (Grade 12 with diploma or GED certificate)",
-    4: "Some college, no degree (includes some community college)",
-    5: "Two-year associate degree from a college or university",
-    6: "Four-year college or university degree/Bachelor’s degree (e.g., BS, BA, AB)",
-    7: "Some postgraduate or professional schooling, no postgraduate degree (e.g. some graduate school)",
-    8: "Postgraduate or professional degree, including master’s, doctorate, medical or law degree (e.g., MA, MS, PhD, MD, JD)",
-    98: "Don’t know",
-    99: "Refused",
+    "Less than high school (Grades 1-8 or no formal schooling)": 1,
+    "High school incomplete (Grades 9-11 or Grade 12 with NO diploma)": 2,
+    "High school graduate (Grade 12 with diploma or GED certificate)": 3,
+    "Some college, no degree (includes some community college)": 4,
+    "Two-year associate degree from a college or university": 5,
+    "Four-year college or university degree/Bachelor’s degree (e.g., BS, BA, AB)": 6,
+    "Some postgraduate or professional schooling, no postgraduate degree (e.g. some graduate school)": 7,
+    "Postgraduate or professional degree, including master’s, doctorate, medical or law degree (e.g., MA, MS, PhD, MD, JD)": 8,
+    "Don’t know": 98,
+    "Refused": 99,
 }
 
 # Parent mapping
@@ -60,18 +60,18 @@ parent_mapping = {
 }
 
 marital_mapping = {
-    1: "Married",
-    2: "Living with a partner",
-    3: "Divorced",
-    4: "Separated",
-    5: "Widowed",
-    6: "Never been married",
+    "Married": 1,
+    "Living with a partner": 2,
+    "Divorced": 3,
+    "Separated": 4,
+    "Widowed": 5,
+    "Never been married": 6,
 }
 
 gender_mapping = {
-    1: "Male",
-    2: "Female",
-    3: "Other",
+    "Male": 1,
+    "Female": 2,
+    "Other": 3,
 }
 
 educ2 = st.sidebar.selectbox("Select your education level:", list(education_levels.values()), index=0, format_func=lambda x: next(key for key, value in education_levels.items() if value == x))
