@@ -151,28 +151,9 @@ def pred_from_new_data(income, educ2, par, marital, gender, age):
     else:
         sm_pred = "Not a Linkedin User"
 
-    print(f"Predicted class (42 year old): %s" % sm_pred)
-    print(f"Probability that this person is a linked in user (42 year old): {probs[0][1]}\n")
+    st.write(f"Predicted class (42 year old): %s" % sm_pred)
+    st.write(f"Probability that this person is a linked in user (42 year old): {probs[0][1]}\n")
 
-    newdata2 = pd.DataFrame({
-        "income": [8],
-        "educ2": [7],
-        "par": [0],
-        "marital": [1],
-        "gender": [1],
-        "age": [82]
-    })
-
-    prediction2 = lr.predict(newdata2)
-    probs2 = lr.predict_proba(newdata2)
-
-    if prediction2 == 1:
-        sm_pred2 = "Linkedin User"
-    else:
-        sm_pred2 = "Not a Linkedin User"
-
-    st.write(f"Predicted class (82 year old): %s" % sm_pred2)
-    st.write("Probability that this person is a linked in user: %s" % probs2)
 
 
 def clean_sm(x):
@@ -181,5 +162,5 @@ def clean_sm(x):
 
 
 if st.button("Generate Prediction"):
-    print(income, educ2, par, marital, gender, age)
+    st.write(income, educ2, par, marital, gender, age)
     pred_from_new_data(income, educ2, par, marital, gender, age)
