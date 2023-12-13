@@ -151,8 +151,8 @@ def pred_from_new_data(income, educ2, par, marital, gender, age):
     else:
         sm_pred = "Not a Linkedin User"
 
-    st.write(f"Predicted class (42 year old): %s" % sm_pred)
-    st.write(f"Probability that this person is a linked in user (42 year old): {probs[0][1]}\n")
+    st.write(f"Predicted class: %s" % sm_pred)
+    st.write(f"Probability that this person is a linked in user: {probs[0][1]}\n")
 
 
 
