@@ -40,16 +40,15 @@ for income_range, mapped_value in income_mapping.items():
         break
 
 education_levels = {
-    "Less than high school (Grades 1-8 or no formal schooling)": 1,
-    "High school incomplete (Grades 9-11 or Grade 12 with NO diploma)": 2,
-    "High school graduate (Grade 12 with diploma or GED certificate)": 3,
-    "Some college, no degree (includes some community college)": 4,
-    "Two-year associate degree from a college or university": 5,
-    "Four-year college or university degree/Bachelor’s degree (e.g., BS, BA, AB)": 6,
-    "Some postgraduate or professional schooling, no postgraduate degree (e.g. some graduate school)": 7,
-    "Postgraduate or professional degree, including master’s, doctorate, medical or law degree (e.g., MA, MS, PhD, MD, JD)": 8,
+    "Less than high school": 1,
+    "High school incomplete": 2,
+    "High school graduate": 3,
+    "Some college, no degree": 4,
+    "Two-year associate degree": 5,
+    "Four-year college or university degree": 6,
+    "Some postgraduate or professional schooling": 7,
+    "Postgraduate or professional degree": 8,
     "Don’t know": 98,
-    "Refused": 99,
 }
 
 # Parent mapping
@@ -173,7 +172,7 @@ def pred_from_new_data(income, educ2, par, marital, gender, age):
         sm_pred2 = "Not a Linkedin User"
 
     st.write(f"Predicted class (82 year old): %s" % sm_pred2)
-    st.write("Probability that this person is a linked in user (82 year old): {probs2[0][1]}")
+    st.write("Probability that this person is a linked in user: %s" % probs2)
 
 
 def clean_sm(x):
