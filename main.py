@@ -74,11 +74,12 @@ gender_mapping = {
     3: "Other",
 }
 
-educ2 = st.sidebar.selectbox("Select your education level:", list(education_levels.values()))
-par = st.sidebar.selectbox("Are you a parent?", list(parent_mapping.values()))
-marital = st.sidebar.selectbox("Are you married?", list(marital_mapping.values()))
-gender = st.sidebar.selectbox("Select your gender", list(gender_mapping.values()))
+educ2 = st.sidebar.selectbox("Select your education level:", list(education_levels.values()), format_func=lambda x: next(key for key, value in education_levels.items() if value == x))
+par = st.sidebar.selectbox("Are you a parent?", list(parent_mapping.values()), format_func=lambda x: next(key for key, value in parent_mapping.items() if value == x))
+marital = st.sidebar.selectbox("Are you married?", list(marital_mapping.values()), format_func=lambda x: next(key for key, value in marital_mapping.items() if value == x))
+gender = st.sidebar.selectbox("Select your gender", list(gender_mapping.values()), format_func=lambda x: next(key for key, value in gender_mapping.items() if value == x))
 age = st.sidebar.slider("How old are you?", min_value=18, max_value=100, value=25)
+
 
 # Map income to the specified ranges
 age_mapping = {
