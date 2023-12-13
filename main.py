@@ -131,6 +131,7 @@ def train_model():
 
 
 def pred_from_new_data(income, educ2, par, marital, gender, age):
+    print(income, educ2, par, marital, gender, age)
     lr = train_model()
 
     newdata = pd.DataFrame({
