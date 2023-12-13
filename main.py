@@ -15,7 +15,6 @@ st.markdown(
 
 
 # Sidebar header
-st.set_page_config(layout="wide")
 st.sidebar.header("User Inputs")
 
 # User input fields
