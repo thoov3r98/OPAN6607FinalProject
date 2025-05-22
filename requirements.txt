@@ -7,3 +7,4 @@ wheel~=0.36.2
 tornado~=6.4
 setuptools~=57.0.0
 streamlit~=1.12.0
+altair==4.2.2
