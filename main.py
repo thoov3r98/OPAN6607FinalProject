@@ -5,20 +5,19 @@ from sklearn.linear_model import LogisticRegression
 from sklearn.model_selection import train_test_split
 import streamlit as st
 
-
-st.markdown("<h1 style='text-align: center;'>Thomas Hoover's OPAN6607 Final Project</h1>", unsafe_allow_html=True)
-#leaving a comment
 st.markdown(
-    "<h3 style='text-align: center;'>This app will provide a probability of how likely a person is to use LinkedIn based on the given inputs</h3>",
+    "<h3 style='text-align: center; color: #6c757d;'>Predict the likelihood of someone using LinkedIn based on demographic inputs</h3>",
     unsafe_allow_html=True
 )
 
+st.markdown("---")
 
-# Sidebar header
+
+# Sidebar
 st.sidebar.header("User Inputs")
 
-# User input fields
-income_slider = st.sidebar.slider("Select your income:", min_value=0, max_value=151000, value=50000, step=1000)
+# User Inputs
+income_slider = st.sidebar.slider("Annual Income ($)", min_value=0, max_value=151000, value=50000, step=1000)
 
 # Map income to the specified ranges
 income_mapping = {
@@ -73,11 +72,36 @@ gender_mapping = {
     "Other": 3,
 }
 
-educ2 = st.sidebar.selectbox("Select your education level:", list(education_levels.values()), index=0, format_func=lambda x: next(key for key, value in education_levels.items() if value == x))
-par = st.sidebar.selectbox("Are you a parent?", list(parent_mapping.values()), index=0, format_func=lambda x: next(key for key, value in parent_mapping.items() if value == x))
-marital = st.sidebar.selectbox("Are you married?", list(marital_mapping.values()), index=0, format_func=lambda x: next(key for key, value in marital_mapping.items() if value == x))
-gender = st.sidebar.selectbox("Select your gender", list(gender_mapping.values()), index=0, format_func=lambda x: next(key for key, value in gender_mapping.items() if value == x))
-age = st.sidebar.slider("How old are you?", min_value=18, max_value=100, value=25)
+
+educ2 = st.sidebar.selectbox(
+    "🎓 Education Level", 
+    list(education_levels.values()), 
+    index=0, 
+    format_func=lambda x: next(k for k, v in education_levels.items() if v == x)
+)
+
+par = st.sidebar.selectbox(
+    "👶 Are you a parent?", 
+    list(parent_mapping.values()), 
+    index=0, 
+    format_func=lambda x: next(k for k, v in parent_mapping.items() if v == x)
+)
+
+marital = st.sidebar.selectbox(
+    "💍 Marital Status", 
+    list(marital_mapping.values()), 
+    index=0, 
+    format_func=lambda x: next(k for k, v in marital_mapping.items() if v == x)
+)
+
+gender = st.sidebar.selectbox(
+    "⚧ Gender", 
+    list(gender_mapping.values()), 
+    index=0, 
+    format_func=lambda x: next(k for k, v in gender_mapping.items() if v == x)
+)
+
+age = st.sidebar.slider("🎂 Age", min_value=18, max_value=100, value=25)
 
 
 
@@ -93,14 +117,18 @@ for income_range, mapped_value in income_mapping.items():
         income = mapped_value
         break
 
-# Display user inputs
-st.subheader("User Inputs:")
-st.write(f"**Income:** {income}")
-st.write(f"**Education Level:** {educ2}")
-st.write(f"**Parent:** {par}")
-st.write(f"**Marital Status:** {marital}")
-st.write(f"**Gender:** {gender}")
-st.write(f"**Age:** {age}")
+st.markdown("## 👤 Summary of User Inputs")
+col1, col2 = st.columns(2)
+with col1:
+    st.markdown(f"- **Income Level:** ${income_slider:,} → Category {income}")
+    st.markdown(f"- **Age:** {age} years")
+    st.markdown(f"- **Gender:** {next(k for k, v in gender_mapping.items() if v == gender)}")
+with col2:
+    st.markdown(f"- **Education:** {next(k for k, v in education_levels.items() if v == educ2)}")
+    st.markdown(f"- **Parental Status:** {next(k for k, v in parent_mapping.items() if v == par)}")
+    st.markdown(f"- **Marital Status:** {next(k for k, v in marital_mapping.items() if v == marital)}")
+
+st.markdown("---")
 
 
 def train_model():
