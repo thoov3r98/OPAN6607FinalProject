@@ -54,7 +54,7 @@ education_levels = {
 parent_mapping = {
     "Yes": 1,
     "No": 2,
-    "(VOL.) Don't know": 3,
+    "Don't know": 3,
 }
 
 marital_mapping = {
